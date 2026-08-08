@@ -157,5 +157,5 @@ window.addEventListener('load', function () {
     }
   }, 400}
                         
-  
+  init();
 
