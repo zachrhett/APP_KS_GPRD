@@ -131,40 +131,4 @@ function renderReferences(){
 init();
 
 
-// Make #executive-view from the QR code work
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    var hash = window.location.hash;
-    if (!hash || hash === '#') {
-      hash = '#executive-view';
-    }
-    hash = hash.replace('#', '');
-
-    // Find the matching page
-    var target = null;
-    for (var i = 0; i < pages.length; i++) {
-      if (pages[i].id === hash) {
-        target = pages[i];
-        break;
-      }
-    }
-    if (!target) target = pages[0];
-
-    // Try to activate it
-    if (typeof go === 'function') {
-      go(target.id);
-    } else {
-      // Click the button that matches
-      var buttons = document.querySelectorAll('button');
-      for (var j = 0; j < buttons.length; j++) {
-        var btn = buttons[j];
-        if (btn.innerText.toLowerCase().indexOf('executive') !== -1 || 
-            (btn.getAttribute('data-id') && btn.getAttribute('data-id') === target.id)) {
-          btn.click();
-          break;
-        }
-      }
-    }
-  }, 500);
-});
 
