@@ -131,27 +131,40 @@ function renderReferences(){
 init();
 
 
-// Fo
-  }// Force Executive View on load
-window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    const hash = (window.location.hash || '#executive-view').replace('#', '');
-    const target = pages.find(p => p.id === hash) || pages[0];
-    
-    // Try every common function name
-    if (typeof go === 'function') go(target.id);
-    else if (typeof showPage === 'function') showPage(target.id);
-    else if (typeof loadPage === 'function') loadPage(target.id);
-    else if (typeof navigate === 'function') navigate(target.id);
-    
-    // Also try clicking the button
-    const buttons = document.querySelectorAll('.button-strip button');
-    buttons.forEach(btn => {
-      if (btn.textContent.toLowerCase().includes('executive') || 
-          btn.getAttribute('data-id') === target.id) {
-        btn.click();
+// Make #executive-view from the QR code work
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var hash = window.location.hash;
+    if (!hash || hash === '#') {
+      hash = '#executive-view';
+    }
+    hash = hash.replace('#', '');
+
+    // Find the matching page
+    var target = null;
+    for (var i = 0; i < pages.length; i++) {
+      if (pages[i].id === hash) {
+        target = pages[i];
+        break;
       }
-    });
-  }, 300);
+    }
+    if (!target) target = pages[0];
+
+    // Try to activate it
+    if (typeof go === 'function') {
+      go(target.id);
+    } else {
+      // Click the button that matches
+      var buttons = document.querySelectorAll('button');
+      for (var j = 0; j < buttons.length; j++) {
+        var btn = buttons[j];
+        if (btn.innerText.toLowerCase().indexOf('executive') !== -1 || 
+            (btn.getAttribute('data-id') && btn.getAttribute('data-id') === target.id)) {
+          btn.click();
+          break;
+        }
+      }
+    }
+  }, 500);
 });
-});
+
