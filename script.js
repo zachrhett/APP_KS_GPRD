@@ -131,4 +131,29 @@ function renderReferences(){
 init();
 
 
+// Handle QR code hash so it opens on Executive View
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    var hash = window.location.hash.replace('#', '');
+    if (!hash) hash = 'executive-view';
 
+    var target = pages.find(function (p) { return p.id === hash; }) || pages[0];
+
+    // Try the most common function names used in this kind of code
+    if (typeof go === 'function') {
+      go(target.id);
+    } else if (typeof showPage === 'function') {
+      showPage(target.id);
+    } else {
+      // Click the matching tab button as a fallback
+      var buttons = document.querySelectorAll('.button-strip button, button');
+      for (var i = 0; i < buttons.length; i++) {
+        var btn = buttons[i];
+        if (btn.textContent.trim().toLowerCase().indexOf('executive') !== -1) {
+          btn.click();
+          break;
+        }
+      }
+    }
+  }, 400);
+});
