@@ -1,5 +1,5 @@
 const pages = [
-  { id:'executive-view', title:'Executive View', image:'images/executive-view.png' },
+  { id:'#executive-view', title:'Executive View', image:'images/executive-view.png' },
   { id:'financial-opportunity-analysis', title:'Financial Opportunity Analysis', image:'images/financial-opportunity-analysis.png' },
   { id:'10-point-rollout', title:'10-Point Rollout', image:'images/10-point-rollout.png' },
   { id:'pre-pilot', title:'Pre-Pilot', image:'images/pre-pilot.png' },
