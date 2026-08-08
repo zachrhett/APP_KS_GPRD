@@ -155,39 +155,6 @@ window.addEventListener('load', function () {
         }
       }
     }
-  }, 400);
-});
-
-
-// Force start on Executive View for QR codes
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    if (typeof go === 'function') {
-      go('executive-view');
-    } else if (typeof showPage === 'function') {
-      showPage('executive-view');
-    } else {
-      var btn = document.querySelector('.button-strip button');
-      if (btn) btn.click();
-    }
-  }, 500);
-});
-
-
-
-// Always open on Executive View (makes QR codes reliable)
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    // Force the first page (Executive View)
-    if (typeof go === 'function') {
-      go('executive-view');
-    } else if (typeof showPage === 'function') {
-      showPage('executive-view');
-    } else {
-      // Fallback: click the first tab button
-      var firstBtn = document.querySelector('.button-strip button');
-      if (firstBtn) firstBtn.click();
-    }
-  }, 300);
-});
+  }, 400;
+  
 
