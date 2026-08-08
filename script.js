@@ -129,3 +129,20 @@ function renderReferences(){
 }
 
 init();
+
+
+// Force Executive View on load (fixes QR hash)
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = (window.location.hash || '#executive-view').replace('#', '');
+  const target = pages.find(p => p.id === hash) || pages[0];
+  if (typeof go === 'function') {
+    go(target.id);
+  } else if (typeof showPage === 'function') {
+    showPage(target.id);
+  } else {
+    // last resort - try to click the matching button
+    const btn = document.querySelector(`button[data-id="${target.id}"]`) || 
+                document.querySelector('.button-strip button');
+    if (btn) btn.click();
+  }
+});
