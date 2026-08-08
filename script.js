@@ -131,5 +131,10 @@ function renderReferences(){
 init();
 
 
-
+window.addEventListener('load', function() {
+  var hash = window.location.hash.replace('#','') || 'executive-view';
+  if (typeof go === 'function') {
+    go(hash);
+  }
+});
 
